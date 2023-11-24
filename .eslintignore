@@ -1,0 +1,18 @@
+
+# dependencies
+node_modules/
+.yarn/
+
+# production
+build/
+public/
+
+# src/@history
+# src/@tk
+# src/@lodash
+# !src/app/main/**/*.js  
+
+# ide
+.vscode/
+
+# external docs
