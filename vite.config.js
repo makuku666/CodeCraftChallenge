@@ -8,6 +8,11 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  input: 'src/index.js',
+  output: {
+    dir: 'dist',
+    format: 'cjs'
+  },
   plugins: [
     react(),
     alias({
@@ -22,5 +27,13 @@ export default defineConfig({
         }
       ]
     })
-  ]
+  ],
+  test: {
+    files: '**/*.test.js', // Pattern for test files
+    transform: {
+      '^.+\\.jsx?$': 'babel-jest' // Transformation configuration
+    },
+    testEnvironment: 'jsdom', // Example environment (can be changed as needed)
+    maxConcurrency: 4 // Number of parallel test processes to run
+  }
 })
