@@ -1,22 +1,26 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/order */
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { fileURLToPath, URL } from 'url'
+import alias from '@rollup/plugin-alias'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: [
-      {
-        find: '@src',
-        replacement: fileURLToPath(new URL('./src', import.meta.url))
-      },
-      {
-        find: '@root',
-        replacement: fileURLToPath(new URL('./', import.meta.url))
-      }
-    ]
-  }
+  plugins: [
+    react(),
+    alias({
+      entries: [
+        {
+          find: '@src',
+          replacement: path.resolve(__dirname, './src')
+        },
+        {
+          find: '@root',
+          replacement: path.resolve(__dirname, './')
+        }
+      ]
+    })
+  ]
 })
