@@ -1,17 +1,13 @@
-import { useQuery } from '@apollo/client'
-import viteLogo from '@root/vite.svg'
-import reactLogo from '@src/assets/react.svg'
 import { useState } from 'react'
+import viteLogo from 'public/vite.svg'
+import reactLogo from 'src/assets/react.svg'
 
 import './App.css'
 
-import { getLocationsQuery } from './graphql/queries/locations'
-
 function App() {
   const [count, setCount] = useState(0)
-  const { loading, error, data } = useQuery(getLocationsQuery)
+  // const { loading, error, data } = useQuery(getLocationsQuery)
 
-  console.log(loading, error, data)
   return (
     <>
       <div>
