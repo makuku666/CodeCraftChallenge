@@ -1,10 +1,16 @@
-import React from 'react'
+import { ApolloProvider } from '@apollo/client'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+
+import App from './App'
+import { client } from './graphql/client'
+
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </StrictMode>
 )
