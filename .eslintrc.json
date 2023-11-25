@@ -6,32 +6,60 @@
   },
   "extends": [
     "airbnb",
-    "plugin:json/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:json/recommended"
   ],
-  "overrides": [],
+  "overrides": [
+    // override "simple-import-sort" config
+    {
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Packages `react` related packages come first.
+              ["^react", "^@?\\w"],
+              // Internal packages.
+              ["^(@|components)(/.*|$)"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports.
+              ["^.+\\.?(css)$"]
+            ]
+          }
+        ]
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "unused-imports", "json", "prettier"],
+  "plugins": [
+    "simple-import-sort",
+    "react",
+    "react-hooks",
+    "import",
+    "unused-imports",
+    "json",
+    "prettier"
+  ],
   "settings": {
     "react": {
       "version": "18.2.0"
     }
   },
   "rules": {
-    "import/order": [
-      "error",
-      {
-        "groups": [["builtin", "external"], "internal", ["parent", "sibling"]],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
     "react/jsx-filename-extension": [
       "warn",
       {
@@ -62,6 +90,7 @@
     "react/react-in-jsx-scope": "off", // after react v17
     "react/jsx-uses-react": "off", // after react v17
     "react/jsx-no-bind": "off",
+    "react/function-component-definition": "off",
     "unused-imports/no-unused-imports": "warn"
   }
 }
