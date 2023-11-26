@@ -2,9 +2,9 @@ import { useState } from 'react'
 import viteLogo from 'public/vite.svg'
 import reactLogo from 'src/assets/react.svg'
 
-import './App.css'
+import 'src/App.css'
 
-function App() {
+function LandingPage() {
   const [count, setCount] = useState(0)
   // const { loading, error, data } = useQuery(getLocationsQuery)
 
@@ -24,7 +24,7 @@ function App() {
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Edit <code>src/LandingPage.jsx</code> and save to test HMR
         </p>
       </div>
       <p className="read-the-docs">
@@ -34,4 +34,4 @@ function App() {
   )
 }
 
-export default App
+export default LandingPage
