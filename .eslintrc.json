@@ -68,6 +68,10 @@
     ],
     "import/no-extraneous-dependencies": ["warn", { "devDependencies": true }],
     "import/prefer-default-export": "off",
+    "import/extensions": [
+      "warn",
+      { ".js": "never", ".jsx": "never", ".ts": "never", ".tsx": "never" }
+    ],
     "no-undef": "error",
     "no-unused-vars": "error",
     "no-console": "off",
