@@ -1,15 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom'
-import LoginPage from 'src/pages/LoginPage/LoginPage'
-
-import LandingPage from '@/src/pages/LandingPage/LandingPage'
-
-import ContentPage from '../pages/ContentPage/ContentPage'
-import ErrorPage from '../pages/ErrorPage/ErrorPage'
+import ContentPage from 'pages/ContentPage/ContentPage'
+import ErrorPage from 'pages/ErrorPage/ErrorPage'
+import LandingPage from 'pages/LandingPage/LandingPage'
+import LoginPage from 'pages/LoginPage/LoginPage'
+import CommonLayout from 'src/layouts/CommonLayout'
 
 export const routerConfig = createBrowserRouter([
   {
     path: '/',
-    element: <LandingPage />,
+    element: (
+      <CommonLayout>
+        <LandingPage />
+      </CommonLayout>
+    ),
     meta: {
       title: 'LandingPage',
       description: 'Homepage of the application'
@@ -17,7 +20,11 @@ export const routerConfig = createBrowserRouter([
   },
   {
     path: '/content',
-    element: <ContentPage />,
+    element: (
+      <CommonLayout>
+        <ContentPage />,
+      </CommonLayout>
+    ),
     meta: {
       title: 'ContentPage',
       description: 'Show user content',
@@ -27,7 +34,11 @@ export const routerConfig = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginPage />
+    element: (
+      <CommonLayout>
+        <LoginPage />
+      </CommonLayout>
+    )
   },
   {
     path: '/404',
