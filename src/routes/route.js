@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
+import LoginPage from 'src/pages/LoginPage/LoginPage'
 import App from 'src/App'
-
-import Test from 'components/Test'
 
 export const routerConfig = createBrowserRouter([
   {
@@ -10,7 +9,7 @@ export const routerConfig = createBrowserRouter([
     errorElement: <div>Error</div>
   },
   {
-    path: '/test',
-    element: <Test />
+    path: '/login',
+    element: <LoginPage />
   }
 ])

@@ -2,8 +2,9 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
-import { routerConfig } from 'src/configs/routerConfig'
 import { client } from 'src/graphql/client'
+
+import { routerConfig } from './routes/route'
 
 import './index.css'
 
