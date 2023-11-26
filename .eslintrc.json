@@ -69,7 +69,7 @@
     "import/no-extraneous-dependencies": ["warn", { "devDependencies": true }],
     "import/prefer-default-export": "off",
     "import/extensions": [
-      "warn",
+      "off",
       { ".js": "never", ".jsx": "never", ".ts": "never", ".tsx": "never" }
     ],
     "no-undef": "error",
