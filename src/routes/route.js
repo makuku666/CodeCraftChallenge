@@ -3,45 +3,36 @@ import ContentPage from 'pages/ContentPage/ContentPage'
 import ErrorPage from 'pages/ErrorPage/ErrorPage'
 import LandingPage from 'pages/LandingPage/LandingPage'
 import LoginPage from 'pages/LoginPage/LoginPage'
+import PrivateContent from 'src/components/PrivateContent/PrivateContent'
+import {
+  NAV_CONTENT,
+  NAV_HOME,
+  NAV_LOGIN
+} from 'src/constants/routeNames.const'
 import CommonLayout from 'src/layouts/CommonLayout'
 
 export const routerConfig = createBrowserRouter([
   {
-    path: '/',
-    element: (
-      <CommonLayout>
-        <LandingPage />
-      </CommonLayout>
-    ),
-    meta: {
-      title: 'LandingPage',
-      description: 'Homepage of the application'
-    }
-  },
-  {
-    path: '/content',
-    element: (
-      <CommonLayout>
-        <ContentPage />,
-      </CommonLayout>
-    ),
-    meta: {
-      title: 'ContentPage',
-      description: 'Show user content',
-      requiresAuth: true, // Indicates if authentication is required for this page
-      permissions: [] // Permissions required to access this page
-    }
-  },
-  {
-    path: '/login',
-    element: (
-      <CommonLayout>
-        <LoginPage />
-      </CommonLayout>
-    )
-  },
-  {
-    path: '/404',
-    element: <ErrorPage />
+    path: NAV_HOME,
+    element: <CommonLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: NAV_HOME,
+        element: <LandingPage />
+      },
+      {
+        path: NAV_CONTENT,
+        element: (
+          <PrivateContent requiresAuth>
+            <ContentPage />
+          </PrivateContent>
+        )
+      },
+      {
+        path: NAV_LOGIN,
+        element: <LoginPage />
+      }
+    ]
   }
 ])

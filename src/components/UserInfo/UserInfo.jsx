@@ -1,22 +1,41 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useQuery } from '@apollo/client'
+import { NAV_LOGIN } from 'src/constants/routeNames.const'
+import { GQL_USER } from 'src/graphql/queries/user'
+import {
+  getHeader,
+  isAuthenticationValid,
+  removeSessionToken
+} from 'src/utils/login.util'
+
+const userDefault = null
 
 const UserInfo = () => {
-  const [currentUser, setCurrentUser] = useState(null)
+  const navigate = useNavigate()
+  const [user, setUser] = useState(userDefault)
+  const { data } = useQuery(GQL_USER, getHeader())
 
-  // Simulating login function
-  const login = () => {
-    setCurrentUser('JohnDoe') // Set the current user upon login
-  }
+  useEffect(() => {
+    const temp = data?.Viewer.Auth.currentUser
 
-  // Simulating logout function
+    if (data && temp) {
+      const { name: userName } = temp.user
+      setUser(isAuthenticationValid() ? userName : userDefault)
+    }
+  }, [data])
+
   const logout = () => {
-    setCurrentUser(null) // Clear the current user upon logout
+    removeSessionToken()
+    setUser(userDefault)
+    navigate(NAV_LOGIN)
   }
+
   return (
     <div>
-      {currentUser ? (
+      {user ? (
         <div>
-          <p>Welcome, {currentUser}!</p>
+          <p>Welcome, {user}!</p>
           <button type="button" onClick={logout}>
             Logout
           </button>
@@ -24,7 +43,7 @@ const UserInfo = () => {
       ) : (
         <div>
           <p>
-            Please <a href="/login">login</a> to continue.
+            Please <Link to={NAV_LOGIN}>login</Link> to continue.
           </p>
         </div>
       )}

@@ -1,30 +1,36 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
+import LoadSpinner from 'src/components/LoadSpinner/LoadSpinner'
+import { GQL_AUTH } from 'src/graphql/mutations/login'
+import useAuth from 'src/hooks/useAuth'
+import { setToken } from 'src/utils/login.util'
 
-// import { AUTH } from '@  src/graphql/mutations/login'
-import { AUTH } from '@/src/graphql/mutations/login'
+const inputDefault = ''
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loginJwt, { data, error, loading }] = useMutation(AUTH)
+  const [email, setEmail] = useState(inputDefault)
+  const [password, setPassword] = useState(inputDefault)
+  const [loginJwt, { data, loading }] = useMutation(GQL_AUTH)
+  const navigate = useNavigate()
+  const checkAuthAndRedirect = useAuth()
+
+  useEffect(() => {
+    if (data && data.Auth && data.Auth.loginJwt) {
+      const { accessToken, refreshToken } = data.Auth.loginJwt.jwtTokens
+      setToken(accessToken, refreshToken)
+      checkAuthAndRedirect()
+    }
+  }, [data, navigate])
 
   const handleLogin = (e) => {
     e.preventDefault()
-    console.log(email, password)
-    loginJwt({ variables: { email, password } })
-      // loginJwt(email, password)
-      .then((res) => {
-        console.log('Login successful:', res.data)
-        // Handle successful login, access token etc.
-      })
-      .catch((err) => {
-        console.error('Login failed:', err)
-        // Handle login error
-      })
+    loginJwt({ variables: { email, password, clientMutationId: '' } })
+    setEmail(inputDefault)
+    setPassword(inputDefault)
   }
 
-  return (
+  const form = (
     <form onSubmit={handleLogin}>
       <div>
         <label htmlFor="email">Email:</label>
@@ -34,6 +40,7 @@ const LoginPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          aria-label="Email"
         />
       </div>
       <div>
@@ -44,11 +51,19 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          aria-label="Password"
         />
       </div>
       <button type="submit">Login</button>
     </form>
   )
+
+  const renderComponent = () => {
+    if (loading) return <LoadSpinner />
+    return form
+  }
+
+  return renderComponent()
 }
 
 export default LoginPage
