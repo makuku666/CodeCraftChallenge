@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { NAV_HOME } from 'src/constants/routeNames.const'
 
 import UserInfo from 'components/UserInfo/UserInfo'
 
@@ -11,7 +12,7 @@ const Navbar = () => {
         justifyContent: 'space-between'
       }}
     >
-      <Link to="/">Home</Link>
+      <Link to={NAV_HOME}>Home</Link>
       <UserInfo />
     </div>
   )

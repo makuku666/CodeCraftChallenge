@@ -1,6 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-export const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
-  cache: new InMemoryCache()
-})
+export const apolloClient = () => {
+  const client = new ApolloClient({
+    uri: 'https://staging.api.constellation.academy/api/graphql',
+    cache: new InMemoryCache()
+  })
+
+  return client
+}

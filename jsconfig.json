@@ -2,14 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*", ""],
-      "src/*": ["./src/*", "./dist/*", ""],
+      "src/*": ["./src/*", ""],
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
       "public/*": ["public/*"]
-      //   "@src/*": ["src/*", ""],
-      // "assets/*": ["src/assets/*"],
-      // "graphql/*": ["src/graphql/*"]
     }
   }
 }

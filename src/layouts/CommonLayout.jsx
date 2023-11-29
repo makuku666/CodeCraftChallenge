@@ -1,6 +1,9 @@
+import { Outlet } from 'react-router-dom'
+
 import Navbar from 'components/Navbar/Navbar'
 
-const CommonLayout = ({ children }) => {
+const CommonLayout = () => {
+  console.log('CommonLayout')
   return (
     <div
       style={{
@@ -9,7 +12,7 @@ const CommonLayout = ({ children }) => {
       }}
     >
       <Navbar />
-      {children}
+      <Outlet />
     </div>
   )
 }

@@ -66,7 +66,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
-    "import/no-extraneous-dependencies": ["warn", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": ["off", { "devDependencies": true }],
     "import/prefer-default-export": "off",
     "import/extensions": [
       "off",
