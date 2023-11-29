@@ -2,14 +2,13 @@ import { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { nanoid } from 'nanoid'
-import LoadSpinner from 'src/components/LoadSpinner/LoadSpinner'
 import { ERR_CODE_UNAUTH } from 'src/constants/error.const'
 import { NAV_LOGIN } from 'src/constants/routeNames.const'
 import { GQL_CONTENT } from 'src/graphql/queries/content'
 import { getHeader } from 'src/utils/login.util'
 
 const ContentPage = () => {
-  const { data, loading, error } = useQuery(GQL_CONTENT, getHeader())
+  const { data, error } = useQuery(GQL_CONTENT, getHeader())
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const ContentPage = () => {
     })
   }, [data])
 
-  return loading ? <LoadSpinner /> : contentList
+  return contentList
 }
 
 export default ContentPage

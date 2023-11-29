@@ -1,15 +1,19 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import ContentPage from 'pages/ContentPage/ContentPage'
-import ErrorPage from 'pages/ErrorPage/ErrorPage'
-import LandingPage from 'pages/LandingPage/LandingPage'
-import LoginPage from 'pages/LoginPage/LoginPage'
-import PrivateContent from 'src/components/PrivateContent/PrivateContent'
 import {
   NAV_CONTENT,
   NAV_HOME,
   NAV_LOGIN
 } from 'src/constants/routeNames.const'
 import CommonLayout from 'src/layouts/CommonLayout'
+
+const ContentPage = lazy(() => import('pages/ContentPage/ContentPage'))
+const ErrorPage = lazy(() => import('pages/ErrorPage/ErrorPage'))
+const LandingPage = lazy(() => import('pages/LandingPage/LandingPage'))
+const LoginPage = lazy(() => import('pages/LoginPage/LoginPage'))
+const PrivateContent = lazy(
+  () => import('src/components/PrivateContent/PrivateContent')
+)
 
 export const routerConfig = createBrowserRouter([
   {

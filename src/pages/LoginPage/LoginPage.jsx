@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
-import LoadSpinner from 'src/components/LoadSpinner/LoadSpinner'
 import { GQL_AUTH } from 'src/graphql/mutations/login'
 import useAuth from 'src/hooks/useAuth'
 import { setToken } from 'src/utils/login.util'
@@ -11,7 +10,7 @@ const inputDefault = ''
 const LoginPage = () => {
   const [email, setEmail] = useState(inputDefault)
   const [password, setPassword] = useState(inputDefault)
-  const [loginJwt, { data, loading }] = useMutation(GQL_AUTH)
+  const [loginJwt, { data }] = useMutation(GQL_AUTH)
   const navigate = useNavigate()
   const checkAuthAndRedirect = useAuth()
 
@@ -58,12 +57,7 @@ const LoginPage = () => {
     </form>
   )
 
-  const renderComponent = () => {
-    if (loading) return <LoadSpinner />
-    return form
-  }
-
-  return renderComponent()
+  return form
 }
 
 export default LoginPage
