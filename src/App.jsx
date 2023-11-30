@@ -1,35 +1,18 @@
-import viteLogo from '@root/vite.svg'
-import reactLogo from '@src/assets/react.svg'
-import { useState } from 'react'
+import { Suspense } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import { ApolloProvider } from '@apollo/client'
+import { apolloClient } from 'src/graphql/client'
+import { routerConfig } from 'src/routes/route'
 
-import './App.css'
+import LoadSpinner from 'components/LoadSpinner/LoadSpinner'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((prev) => prev + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ApolloProvider client={apolloClient()}>
+      <Suspense fallback={<LoadSpinner />}>
+        <RouterProvider router={routerConfig} />
+      </Suspense>
+    </ApolloProvider>
   )
 }
 

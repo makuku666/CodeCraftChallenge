@@ -10,10 +10,18 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+coverage
+/coverage
+./coverage
 *.local
 
+# Test files
+__tests__/
+*.test.js
+*.spec.js
+
 # # Editor directories and files
-.vscode/*
+# .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
