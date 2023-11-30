@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
+import { Center } from '@chakra-ui/react'
+import LoginForm from 'src/components/LoginForm/LoginForm'
 import { GQL_AUTH } from 'src/graphql/mutations/login'
 import useAuth from 'src/hooks/useAuth'
 import { setToken } from 'src/utils/login.util'
 
-const inputDefault = ''
-
 const LoginPage = () => {
-  const [email, setEmail] = useState(inputDefault)
-  const [password, setPassword] = useState(inputDefault)
   const [loginJwt, { data }] = useMutation(GQL_AUTH)
   const navigate = useNavigate()
   const checkAuthAndRedirect = useAuth()
@@ -22,42 +20,16 @@ const LoginPage = () => {
     }
   }, [data, navigate])
 
-  const handleLogin = (e) => {
-    e.preventDefault()
+  const handleLogin = (v) => {
+    const { email, password } = v
     loginJwt({ variables: { email, password, clientMutationId: '' } })
-    setEmail(inputDefault)
-    setPassword(inputDefault)
   }
 
-  const form = (
-    <form onSubmit={handleLogin}>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          aria-label="Email"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          aria-label="Password"
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+  return (
+    <Center w="100%" h="100%">
+      <LoginForm onSubmit={handleLogin} />
+    </Center>
   )
-
-  return form
 }
 
 export default LoginPage
