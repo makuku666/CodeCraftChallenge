@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Box, VStack } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
 import Navbar from 'components/Navbar/Navbar'
 
