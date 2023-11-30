@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { NAV_LOGIN } from 'src/constants/routeNames.const'
 import { GQL_USER } from 'src/graphql/queries/user'
@@ -8,6 +8,8 @@ import {
   isAuthenticationValid,
   removeSessionToken
 } from 'src/utils/login.util'
+
+import UserInfoDisplay from 'components/Navbar/UserInfoDisplay/UserInfoDisplay'
 
 const userDefault = null
 
@@ -31,24 +33,7 @@ const UserInfo = () => {
     navigate(NAV_LOGIN)
   }
 
-  return (
-    <div>
-      {user ? (
-        <div>
-          <p>Welcome, {user}!</p>
-          <button type="button" onClick={logout}>
-            Logout
-          </button>
-        </div>
-      ) : (
-        <div>
-          <p>
-            Please <Link to={NAV_LOGIN}>login</Link> to continue.
-          </p>
-        </div>
-      )}
-    </div>
-  )
+  return <UserInfoDisplay user={user} logout={logout} />
 }
 
 export default UserInfo

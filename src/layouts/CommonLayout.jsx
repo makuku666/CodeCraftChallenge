@@ -1,19 +1,21 @@
 import { Outlet } from 'react-router-dom'
+import { Box } from '@chakra-ui/react'
 
 import Navbar from 'components/Navbar/Navbar'
 
 const CommonLayout = () => {
-  console.log('CommonLayout')
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         width: '100%',
-        height: '100%'
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
       }}
     >
       <Navbar />
       <Outlet />
-    </div>
+    </Box>
   )
 }
 

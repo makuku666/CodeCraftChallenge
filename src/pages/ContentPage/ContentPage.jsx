@@ -1,11 +1,14 @@
 import { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
+import { Grid } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import { ERR_CODE_UNAUTH } from 'src/constants/error.const'
 import { NAV_LOGIN } from 'src/constants/routeNames.const'
 import { GQL_CONTENT } from 'src/graphql/queries/content'
 import { getHeader } from 'src/utils/login.util'
+
+import ContentTile from './components/ContentTile/ContentTile'
 
 const ContentPage = () => {
   const { data, error } = useQuery(GQL_CONTENT, getHeader())
@@ -25,16 +28,23 @@ const ContentPage = () => {
 
     return temp.map((content) => {
       const { title } = content.node.structureDefinition
-
-      return (
-        <div key={nanoid()}>
-          <h3>{title}</h3>
-        </div>
-      )
+      const id = nanoid()
+      return <ContentTile key={id} id={id} title={title} />
     })
   }, [data])
 
-  return contentList
+  return (
+    <Grid
+      bgColor="hotpink"
+      templateColumns="repeat(2, 1fr)"
+      gap={2}
+      p={4}
+      h="100%"
+      overflowY="auto"
+    >
+      {contentList}
+    </Grid>
+  )
 }
 
 export default ContentPage

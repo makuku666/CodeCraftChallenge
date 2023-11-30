@@ -6,7 +6,14 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: { port: 3000, open: true, strictPort: true },
+  server: {
+    port: 3000,
+    open: true,
+    strictPort: true,
+    watch: {
+      usePolling: true
+    }
+  },
   esbuild: {
     loader: 'jsx',
     include: /src\/.*\.jsx?$/,
