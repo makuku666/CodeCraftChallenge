@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { NAV_LOGIN } from 'src/constants/routeNames.const'
+import { AuthContext } from 'src/contexts/authContext'
 import { GQL_USER } from 'src/graphql/queries/user'
 import {
   getHeader,
@@ -16,7 +17,13 @@ const userDefault = null
 const UserInfo = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState(userDefault)
-  const { data } = useQuery(GQL_USER, getHeader())
+  const [fetchUser, { data }] = useLazyQuery(GQL_USER, getHeader())
+  const [{ login }, setAuth] = useContext(AuthContext)
+
+  useEffect(() => {
+    if (!login) return
+    fetchUser()
+  }, [login])
 
   useEffect(() => {
     const temp = data?.Viewer.Auth.currentUser
@@ -29,6 +36,7 @@ const UserInfo = () => {
 
   const logout = () => {
     removeSessionToken()
+    setAuth({ login: false })
     setUser(userDefault)
     navigate(NAV_LOGIN)
   }
