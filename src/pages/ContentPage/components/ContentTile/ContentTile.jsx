@@ -24,7 +24,7 @@ const ContentTile = ({ title, id }) => {
               </Heading>
             </GridItem>
             <GridItem display="flex" colSpan={9} alignItems="center">
-              <Text>{id}</Text>
+              <Text wordBreak={'break-all'}>{id}</Text>
             </GridItem>
           </Grid>
         </CardBody>

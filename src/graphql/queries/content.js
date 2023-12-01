@@ -1,12 +1,13 @@
 import { gql } from '@apollo/client'
 
 export const GQL_CONTENT = gql`
-  query {
+  query GetContentNodes($first: Int!) {
     Admin {
       Tree {
-        GetContentNodes {
+        GetContentNodes(first: $first) {
           edges {
             node {
+              id
               structureDefinition {
                 title
               }
