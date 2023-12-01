@@ -82,7 +82,7 @@ const ContentTile = ({ title, id, index, moveTile }) => {
   return (
     <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
       <GridItem colSpan={1} id={id} index={index}>
-        <Card h="100%" minH="30vh">
+        <Card h="100%" minH="35vh">
           <CardBody>
             <Heading
               as="h1"
