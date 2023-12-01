@@ -8,6 +8,10 @@ import { GQL_AUTH } from 'src/graphql/mutations/login'
 import useAuth from 'src/hooks/useAuth'
 import { setToken } from 'src/utils/login.util'
 
+/**
+ * Component for the login page handling user authentication.
+ * @returns {JSX.Element} JSX element for the login page.
+ */
 const LoginPage = () => {
   const [loginJwt, { data }] = useMutation(GQL_AUTH)
   const navigate = useNavigate()
@@ -23,6 +27,10 @@ const LoginPage = () => {
     }
   }, [data, navigate])
 
+  /**
+   * Handles the login form submission.
+   * @param {Object} v - Object containing email and password values.
+   */
   const handleLogin = (v) => {
     const { email, password } = v
     loginJwt({ variables: { email, password, clientMutationId: '' } })

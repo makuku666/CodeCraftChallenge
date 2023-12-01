@@ -1,6 +1,10 @@
 import { Center, Heading, Highlight, Stack, Text } from '@chakra-ui/react'
 import gqlPic from 'public/graphql.png'
 
+/**
+ * Component for the landing page displaying information about GraphQL content.
+ * @returns {JSX.Element} JSX element for the landing page.
+ */
 function LandingPage() {
   return (
     <Center

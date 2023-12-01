@@ -1,5 +1,9 @@
 import { Center, Spinner } from '@chakra-ui/react'
 
+/**
+ * A component that displays a centered spinner indicating loading or processing.
+ * @returns {JSX.Element} JSX element representing the centered spinner.
+ */
 const LoadSpinner = () => {
   return (
     <Center h="100vh">

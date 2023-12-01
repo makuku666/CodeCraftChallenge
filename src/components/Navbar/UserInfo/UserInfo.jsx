@@ -14,6 +14,10 @@ import UserInfoDisplay from 'components/Navbar/UserInfoDisplay/UserInfoDisplay'
 
 const userDefault = null
 
+/**
+ * A component that displays user information and handles user authentication.
+ * @returns {JSX.Element} JSX element for displaying user information.
+ */
 const UserInfo = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState(userDefault)
@@ -34,6 +38,9 @@ const UserInfo = () => {
     }
   }, [data])
 
+  /**
+   * Logs the user out by removing session token and updating authentication context.
+   */
   const logout = () => {
     removeSessionToken()
     setAuth({ login: false })

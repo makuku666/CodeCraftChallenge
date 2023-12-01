@@ -6,6 +6,10 @@ import { AuthContext } from 'src/contexts/authContext'
 
 import LinkAction from 'components/LinkAction/LinkAction'
 
+/**
+ * A navigation bar component displaying links and user information.
+ * @returns {JSX.Element} JSX element for the navigation bar.
+ */
 const Navbar = () => {
   const [{ login }] = useContext(AuthContext)
 

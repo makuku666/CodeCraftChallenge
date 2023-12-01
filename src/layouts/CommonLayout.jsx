@@ -3,6 +3,10 @@ import { Box } from '@chakra-ui/react'
 
 import Navbar from 'components/Navbar/Navbar'
 
+/**
+ * A common layout component including a navigation bar and rendering nested routes.
+ * @returns {JSX.Element} JSX element for the common layout.
+ */
 const CommonLayout = () => {
   return (
     <Box
