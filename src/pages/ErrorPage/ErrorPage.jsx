@@ -3,6 +3,10 @@ import { Center, Heading, Text } from '@chakra-ui/react'
 import LinkAction from 'src/components/LinkAction/LinkAction'
 import { NAV_HOME } from 'src/constants/routeNames.const'
 
+/**
+ * Component to display an error page when a route is not found (404 error).
+ * @returns {JSX.Element} JSX element for the error page.
+ */
 const ErrorPage = () => {
   const error = useRouteError()
 

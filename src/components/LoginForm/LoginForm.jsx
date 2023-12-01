@@ -10,10 +10,20 @@ import {
 
 const inputDefault = ''
 
+/**
+ * A component that renders a login form.
+ * @param {Object} props - The props for the LoginForm component.
+ * @param {Function} props.onSubmit - The function to be called on form submission.
+ * @returns {JSX.Element} JSX element representing the login form.
+ */
 const LoginForm = ({ onSubmit }) => {
   const [email, setEmail] = useState(inputDefault)
   const [password, setPassword] = useState(inputDefault)
 
+  /**
+   * Handles the form submission.
+   * @param {Event} e - The form submit event.
+   */
   const handleFormSubmit = (e) => {
     e.preventDefault()
     onSubmit({ email, password })

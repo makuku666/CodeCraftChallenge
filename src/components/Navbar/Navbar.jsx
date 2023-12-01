@@ -1,11 +1,18 @@
+import { useContext } from 'react'
 import { Box } from '@chakra-ui/react'
 import UserInfo from 'src/components/Navbar/UserInfo/UserInfo'
 import { NAV_CONTENT, NAV_HOME } from 'src/constants/routeNames.const'
-import { isAuthenticationValid } from 'src/utils/login.util'
+import { AuthContext } from 'src/contexts/authContext'
 
 import LinkAction from 'components/LinkAction/LinkAction'
 
+/**
+ * A navigation bar component displaying links and user information.
+ * @returns {JSX.Element} JSX element for the navigation bar.
+ */
 const Navbar = () => {
+  const [{ login }] = useContext(AuthContext)
+
   return (
     <Box
       sx={{
@@ -24,9 +31,7 @@ const Navbar = () => {
           flexWrap: 'noWrap'
         }}
       >
-        {isAuthenticationValid() && (
-          <LinkAction to={NAV_CONTENT} label="Personal" />
-        )}
+        {login && <LinkAction to={NAV_CONTENT} label="Personal" />}
       </Box>
       <UserInfo />
     </Box>

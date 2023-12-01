@@ -1,25 +1,36 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 import { Center } from '@chakra-ui/react'
 import LoginForm from 'src/components/LoginForm/LoginForm'
+import { AuthContext } from 'src/contexts/authContext'
 import { GQL_AUTH } from 'src/graphql/mutations/login'
 import useAuth from 'src/hooks/useAuth'
 import { setToken } from 'src/utils/login.util'
 
+/**
+ * Component for the login page handling user authentication.
+ * @returns {JSX.Element} JSX element for the login page.
+ */
 const LoginPage = () => {
   const [loginJwt, { data }] = useMutation(GQL_AUTH)
   const navigate = useNavigate()
   const checkAuthAndRedirect = useAuth()
+  const [, setAuth] = useContext(AuthContext)
 
   useEffect(() => {
     if (data && data.Auth && data.Auth.loginJwt) {
       const { accessToken, refreshToken } = data.Auth.loginJwt.jwtTokens
       setToken(accessToken, refreshToken)
+      setAuth({ login: true })
       checkAuthAndRedirect()
     }
   }, [data, navigate])
 
+  /**
+   * Handles the login form submission.
+   * @param {Object} v - Object containing email and password values.
+   */
   const handleLogin = (v) => {
     const { email, password } = v
     loginJwt({ variables: { email, password, clientMutationId: '' } })
